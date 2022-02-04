@@ -4,8 +4,8 @@
 # whenever the repository is cloned into a new loation ...
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-SANDBOX     := /home/wayne/Desktop/SANDBOX
-PRJ_NAME    := ARGOS
+SANDBOX     := /media/ext/argos
+PRJ_NAME    := argos
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Definition of tools and default settings for the project
