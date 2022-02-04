@@ -1,0 +1,142 @@
+{
+   "devices"   :  [
+                     {
+                         "name"           :  "MODBUS_DRIVER_1",
+                         "brand"          :  "",
+                         "type"           :  "",
+                         "enabled"        :  "Y",
+                         "samplerate"     :  "5000",
+                         "id"             :  "3",
+                         "model"          :  "MB_DRIVER_1",
+                         "pgmname"        :  "as-mbtcp",
+                         "communication"  :  {
+                                                       "address"  : "127.0.0.1",
+                                                       "port"     : "1503",
+                                                       "route"    : "",
+                                                       "node"     : ""
+                                             },
+                         "datapoints"     :  [
+                                               {
+                                                 "address"      : "000001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "40",
+                                                 "targettype"   : "OCOILS",
+                                                 "writeable"    : "Y"
+                                               },
+                                               {
+                                                 "address"      : "100001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "40",
+                                                 "targettype"   : "ICOILS",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "300001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "400",
+                                                 "targettype"   : "IREG",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "400001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "555",
+                                                 "targettype"   : "HREG",
+                                                 "writeable"    : "Y"
+                                               },
+                                             ]
+                     },
+                     {
+                         "name"           :  "MODBUS_DRIVER_2",
+                         "brand"          :  "",
+                         "type"           :  "",
+                         "enabled"        :  "Y",
+                         "samplerate"     :  "6500",
+                         "id"             :  "3",
+                         "model"          :  "MB_DRIVER_2",
+                         "pgmname"        :  "as-mbtcp",
+                         "communication"  :  {
+                                                       "address"  : "127.0.0.1",
+                                                       "port"     : "1503",
+                                                       "route"    : "",
+                                                       "node"     : ""
+                                             },
+                         "datapoints"     :  [
+                                               {
+                                                 "address"      : "000001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "20",
+                                                 "targettype"   : "OCOILS",
+                                                 "writeable"    : "Y"
+                                               },
+                                               {
+                                                 "address"      : "100001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "20",
+                                                 "targettype"   : "ICOILS",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "300001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "20",
+                                                 "targettype"   : "IREG",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "400001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "20",
+                                                 "targettype"   : "HREG",
+                                                 "writeable"    : "Y"
+                                               },
+                                             ]
+                     },
+                     {
+                         "name"           :  "MODBUS_DRIVER_3",
+                         "brand"          :  "",
+                         "type"           :  "",
+                         "enabled"        :  "Y",
+                         "samplerate"     :  "2000",
+                         "id"             :  "3",
+                         "model"          :  "MB_DRIVER_3",
+                         "pgmname"        :  "as-mbtcp",
+                         "communication"  :  {
+                                                       "address"  : "127.0.0.1",
+                                                       "port"     : "1503",
+                                                       "route"    : "",
+                                                       "node"     : ""
+                                             },
+                         "datapoints"     :  [
+                                               {
+                                                 "address"      : "000001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "30",
+                                                 "targettype"   : "OCOILS",
+                                                 "writeable"    : "Y"
+                                               },
+                                               {
+                                                 "address"      : "100001",
+                                                 "datatype"     : "BIT",
+                                                 "quantity"     : "30",
+                                                 "targettype"   : "ICOILS",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "300001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "300",
+                                                 "targettype"   : "IREG",
+                                                 "writeable"    : "N"
+                                               },
+                                               {
+                                                 "address"      : "400001",
+                                                 "datatype"     : "SHORT",
+                                                 "quantity"     : "204",
+                                                 "targettype"   : "HREG",
+                                                 "writeable"    : "Y"
+                                               },
+                                             ]
+                     },
+                 ]
+}
