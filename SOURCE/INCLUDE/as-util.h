@@ -2,6 +2,7 @@
 #define ASUTIL_H_INCLUDED
 
 #include "argos.h"
+#include "version.h"
 #include <limits.h>
 #include <syslog.h>
 
@@ -125,7 +126,7 @@ extern const char *_FUNCIONES_HISTORICOS_[];	//!< Funciones para Historicos
 	Bit de Comparacion
 ----------------------------------------------------------*/
 //const __int64_t __BIT2HEX[64] = { 01/20/2022 0x8000000000000000LL is too big for __int64_t
-const __uint64_t __BIT2HEX[64] = {      
+const __uint64_t __BIT2HEX[64] = {
 	0x0000000000000001LL,
 	0x0000000000000002LL,
 	0x0000000000000004LL,
@@ -368,18 +369,18 @@ void primo_mayor_que(unsigned int & );
 /*--------------------------------------------------------
 	Convierte un numero con base dada en string
 ----------------------------------------------------------*/
-//template <class T>
-//string numero2string(T t, ios_base & (*f)(ios_base&))
-//{
-//  ostringstream oss;
-//  oss << f << t;
-//  return oss.str();
-//}
+template <class T>
+string numero2string(T t, ios_base & (*f)(ios_base&))
+{
+  ostringstream oss;
+  oss << f << t;
+  return oss.str();
+}
 
 /*--------------------------------------------------------
 	Registra en el LOG del sistema
 ----------------------------------------------------------*/
-//void escribir_log(const char *, int,const char *);
+void escribir_log(const char *, int,const char *);
 
 /*--------------------------------------------------------
 	Imprime el numero de espacios necesarios para cuadrar
