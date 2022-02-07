@@ -1,0 +1,73 @@
+{
+   "name" : "tags"
+   "tags" : [
+               {
+                  "id"           : "1",
+                  "writeable"    : "Y",
+                  "label"        : "trasl_puente_I_motor_lado_uno",
+                  "default"      : "29.9",
+                  "datatype"     : "REAL_",
+                  "database"     : {
+                                       "type"         : "MUESTREO_",
+                                       "samplerate"   : "1000",
+                                       "max"          : "500",
+                                       "min"          : "10",
+                                       "samples"      : "100",
+                                       "functions"    : "AVG_,STD_",
+                                    },
+                  "device"       : {
+                                          "id"        : "1",
+                                          "model"     : "AB",
+                                          "name"      : "allen_bradley_clx_ethip",
+                                          "register"  : {
+                                                            "address"   : "Programa:Main.Salida_Flotante",
+                                                            "type"      : "REAL_",
+                                                            "bit"       : "",
+                                                         },
+                                    },
+               },
+               {
+                  "id"           : "2",
+                  "writeable"    : "Y",
+                  "label"        : "ganch_aux_Freno_Elevacion",
+                  "default"      : "1",
+                  "datatype"     : "BIT_",
+                  "database"     : "",
+                  "device"       : {
+                                          "id"        : "2",
+                                          "model"     : "SIM",
+                                          "name"      : "sim_mbtcp",
+                                          "register"  : {
+                                                            "address"   : "000001",
+                                                            "type"      : "BIT_",
+                                                            "bit"       : ""
+                                                         }
+                                    }
+               },
+               {
+                  "id"           : "3",
+                  "writeable"    : "Y",
+                  "label"        : "gancho_dist_freno",
+                  "default"      : "10",
+                  "datatype"     : "CORTO_",
+                  "database"     : {
+                                       "type"         : "EVENTO_",
+                                       "samplerate"   : "",
+                                       "max"          : "500",
+                                       "min"          : "10",
+                                       "samples"      : "100",
+                                       "functions"    : "AVG_,STD_",
+                                    },
+                  "device"       : {
+                                          "id"        : "2",
+                                          "model"     : "SIM",
+                                          "name"      : "sim_mbtcp",
+                                          "register"  : {
+                                                            "address"   : "300007",
+                                                            "type"      : "CORTO_",
+                                                            "bit"       : "",
+                                                         },
+                                    },
+               },
+            ]
+}

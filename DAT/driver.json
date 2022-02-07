@@ -1,11 +1,11 @@
 {
     "daemonize"        :  "Y",
-    "plugindirectory"  :  "/home/wayne/Desktop/SANDBOX/ARGOS/LIB/PLUGIN",
+    "plugindirectory"  :  "/media/ext/argos/argos/LIB/PLUGIN",
     "protocols"        :  [
                               {
                                   "protocol"  :  "MODBUS",
                                   "carrier"   :  "TCP",
-                                  "devices"   :  "/home/wayne/Desktop/SANDBOX/ARGOS/DAT/MODBUS_TCP_devices.json"
+                                  "devices"   :  "/media/ext/argos/argos/DAT/MODBUS_TCP_devices.json"
                               }
                           ]
 

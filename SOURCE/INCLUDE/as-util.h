@@ -1,7 +1,17 @@
 #ifndef ASUTIL_H_INCLUDED
 #define ASUTIL_H_INCLUDED
 
-#include "argos.h"
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+    #include "argos.h"
+    #include "json.h"
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
 #include "version.h"
 #include <limits.h>
 #include <syslog.h>

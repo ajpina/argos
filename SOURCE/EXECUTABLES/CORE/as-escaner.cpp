@@ -66,6 +66,7 @@ Por favor reporte cualquier fallo a la siguiente direccion:
 //#include "tinyxml.h"
 
 
+
 #include <stdexcept>
 
 
@@ -164,9 +165,9 @@ int main(int argc, char * argv[]){
 #endif
 	int segmento_memoria = 0, fd = -1;
     for(int i = 0; i < d_cantidad; i++){
-		string nombre_shm = "dispositivos/" +
-				string((*(shmem_dispositivos + i)).nombre);
-
+		// Shared Memory Name Convection has been changed in Modbus TCP Driver
+		//string nombre_shm = "dispositivos/" + string((*(shmem_dispositivos + i)).nombre);
+      string nombre_shm = string((*(shmem_dispositivos + i)).nombre);
  		fd = shm_open(nombre_shm.c_str(), O_RDONLY, S_IREAD);
 		if ( -1 == fd ) {
 			mensaje_error = "Error Abriendo SHMEM /dev/shm/" + nombre_shm +
@@ -357,7 +358,58 @@ bool asignar_opciones(int argc, char **argv) {
 * @param	cantidad	Cantidad de Dispositivos
 * @return	verdadero	Operacion Satisfactoria
 */
-bool leer_config_dispositivos( int & cantidad ){
+bool leer_config_dispositivos( int & devQuantity ){
+   char     wkString[64];
+   char *   name;
+   char *   id;
+   char *   model;
+   string   model_id_name[20];         // Size should be bigger than devQuantity
+   int      reg_x_dev[20] = {0};
+   int      dp;
+   char *   regQuantity_chr;
+
+   if ( access( __ARCHIVO_CONF_DEVS, F_OK ) == -1 ) {  /* File does not exist  */
+      ARGOS_PRINTF("The configuration file does not exist!\nTerminating ...\n");
+      exit(4);
+   }
+   if ( ! json_validator( __ARCHIVO_CONF_DEVS ) ) {
+      ARGOS_PRINTF("The configuration file you have supplied is NOT valid json syntax!\n");
+      ARGOS_PRINTF("Correct the errors before re-trying ...\n");
+      exit( 4 );
+   }
+   json_tokenizer( __ARCHIVO_CONF_DEVS );
+   json_buildDom( );
+
+   devQuantity  = json_array_length("$.devices");
+   if ( devQuantity > 20 ){
+      ARGOS_PRINTF("Too Many Devices!\n");
+      exit( 4 );
+   }
+   for ( int i = 0; i < devQuantity; i++ ){
+      sprintf( wkString, "$.devices[%d].name", i);
+      name = json_extract( wkString );
+      sprintf( wkString, "$.devices[%d].id", i);
+      id = json_extract( wkString );
+      sprintf( wkString, "$.devices[%d].model", i);
+      model = json_extract( wkString );
+      // Shared Memory Name Convection has been changed in Modbus TCP Driver
+      //model_id_name[i] = string(model) + "_" + string(id) + "_" + string(name);
+      sprintf( wkString, "ARGOS_SHARED_DEVICE_%03d", i );
+      model_id_name[i] = string(wkString);
+      sprintf( wkString, "$.devices[%d].datapoints", i);
+      dp  = json_array_length( wkString );
+      for ( int j = 0; j < dp; j++ ){
+         sprintf( wkString, "$.devices[%d].datapoints[%d].quantity", i, j);
+         regQuantity_chr = json_extract( wkString );
+         if ( NULL == regQuantity_chr ){     // It counts as only one register
+            reg_x_dev[i]++;
+         } else {
+            reg_x_dev[i] += atoi(regQuantity_chr); // It adds the block size
+         }
+
+      }
+   }
+   json_finalize();
 
 /**************************************************************************
 	TiXmlDocument doc(__ARCHIVO_CONF_DEVS);
@@ -509,21 +561,23 @@ bool leer_config_dispositivos( int & cantidad ){
 		}
 
 	}
+***********************************************************************************************/
 
-	if( ( shmem_dispositivos = (struct Shm_d *)malloc(sizeof(struct Shm_d) * cantidad) ) == NULL ){
+	if( ( shmem_dispositivos = (struct Shm_d *)malloc(sizeof(struct Shm_d) * devQuantity) ) == NULL ){
 		escribir_log( "as-escaner", LOG_ERR, "Error Reservando Memoria para Dispositivos" );
 		throw runtime_error("Error Reservando Memoria para Dispositivos");
 	}
 
-	for( int i = 0; i < cantidad; i++ ){
+	for( int i = 0; i < devQuantity; i++ ){
 #ifdef _DEBUG_
-		cout <<"Nombre SHMEM: "<< marca_id_nombre[i] << "\t\tRegistros: [" <<
-			reg_x_disp[i] << "]" << endl;
+		cout <<"Nombre SHMEM: "<< model_id_name[i] << "\t\tRegistros: [" <<
+			reg_x_dev[i] << "]" << endl;
 #endif
-		strcpy( (*(shmem_dispositivos + i)).nombre, marca_id_nombre[i].c_str() );
-		(*(shmem_dispositivos + i)).n_registros = reg_x_disp[i];
+		strcpy( (*(shmem_dispositivos + i)).nombre, model_id_name[i].c_str() );
+		(*(shmem_dispositivos + i)).n_registros = reg_x_dev[i];
 	}
-********************************************************************************************************/
+
+
     return true;
 }
 

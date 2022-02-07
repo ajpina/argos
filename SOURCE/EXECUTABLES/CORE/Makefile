@@ -3,7 +3,8 @@ include ../../../project.mk
 # Local modifications to standard tools parameters
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 LIBS        +=  -l json -l dynarray -l argos -l m -l dl -l rt -lpthread
-CFLAGS      +=  -DDEBUG
+
+CFLAGS      +=  -D_DEBUG_
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Find all the C language source files in this directory
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -18,11 +19,11 @@ DEPS := $(SRCS:%.cpp=$(DEP_DIR)/%.d)
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Not Yet (ajpina)
-TARGET := $(BIN_DIR)/argos_foo
+TARGET := $(BIN_DIR)/argos_Scanner
 
 $(TARGET) : $(OBJS)
 	@mkdir -p $(BIN_DIR)
-#	$(GPP) $(CFLAGS) -I $(INC_DIR) -o $(TARGET) $(OBJS) $(LIBS)
+	$(GPP) $(CFLAGS) -I $(INC_DIR) $(OBJS) -o $(TARGET) $(LIBS)
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -39,7 +40,7 @@ POSTCOMPILE = mv -f $(DEP_DIR)/$*.Td $(DEP_DIR)/$*.d && touch $@
 
 $(OBJ_DIR)/%.o : %.cpp
 
-$(OBJ_DIR)/%.o : %.cpp $(DEP_DIR)/%.d 
+$(OBJ_DIR)/%.o : %.cpp $(DEP_DIR)/%.d
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
 	$(GPP) $(DEPFLAGS) $(CFLAGS) -I $(INC_DIR) -c -o $@ $<
 	$(POSTCOMPILE)

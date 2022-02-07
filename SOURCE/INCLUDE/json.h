@@ -21,7 +21,7 @@ extern int    json_array_length(char *path);
 extern char * json_type(char *path);
 extern int    json_tree(char *jsonPath, jsonCallback cb, void *userData);
 extern int    json_each(char *jsonPath, jsonCallback cb, void *userData);
-extern int    json_valid(char *try);
+extern int    json_valid(char *ftry);
 extern int    json_validator( char * filename );
 extern void   json_finalize(void);
 extern int    json_squeezer( char *, char * );
